@@ -41,7 +41,7 @@ int binary_tree_is_bst(const binary_tree_t *tree)
 		value[0] = tree->left->n;
 		value[1] = value[0];
 		preorder_max_min(tree->left, &value[0]);
-		if (value[0] > tree->n)
+		if (value[0] >= tree->n)
 			return (0);
 	}
 	if (tree->right)
@@ -49,7 +49,7 @@ int binary_tree_is_bst(const binary_tree_t *tree)
 		value[0] = tree->right->n;
 		value[1] = value[0];
 		preorder_max_min(tree->right, &value[0]);
-		if (value[1] < tree->n)
+		if (value[1] <= tree->n)
 			return (0);
 	}
 	return (tmp1 && tmp2);
