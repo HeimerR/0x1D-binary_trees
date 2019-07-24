@@ -19,31 +19,38 @@ int preorder(const binary_tree_t *tree, int level, int ref, int *flag)
 	}*/
 	if (level == ref)
 	{
-		printf("%d ",tree->n);
-		if (*flag == 0)
+		printf("%d ", 1);
+		if (*flag == 0 || *flag == 5)
 		{
-			*flag = 2;
-			return (0);
+			*flag = 5;
+			return (*flag);
 		}
-		if (*flag == 2)
-			return (0);
 		*flag = 1;
 	}
-	if (tree->left)
-		 preorder(tree->left, level, ref + 1, flag);
 	else
 	{
-		*flag = 0;
-		printf("NULL ");
+		if (tree->left)
+			preorder(tree->left, level, ref + 1, flag);
+		else
+		{
+			if (*flag == 5)
+				*flag = 5;
+			else
+				*flag = 0;
+			printf("%d ", 0);
+		}
+		if (tree->right)
+			preorder(tree->right, level, ref + 1, flag);
+		else
+		{
+			if (*flag == 5)
+				*flag = 5;
+			else
+				*flag = 0;
+			printf("%d ", 0);
+		}
 	}
-	if (tree->right)
-		 preorder(tree->right, level, ref + 1, flag);
-	else
-	{
-		*flag = 0;
-		printf("NULL ");
-	}
-	return (1);
+	return(*flag);
 }
 /**
  * height - measures the height of a binary tree
@@ -72,18 +79,14 @@ int height(const binary_tree_t *tree)
  **/
 int binary_tree_is_complete(const binary_tree_t *tree)
 {
-	int i, h, check_level;
+	int h, check_level;
 	int flag[1] = {1};
 	if (!tree)
 		return (0);
-
-	h = height(tree);;
-	for (i = 1; i <= h; i++)
-	{
-		printf("\n Level: %d \n", i);
-		check_level = preorder(tree, i, 0, &flag[0]);
-		if (check_level == 0)
-			return (0);
-	}
-	return (check_level);
+	h = height(tree);
+	printf("\nLeVel: %d \n", h);
+	check_level = preorder(tree, h, 0, &flag[0]);
+	if (check_level == 5)
+		return (0);
+	return (1);
 }
