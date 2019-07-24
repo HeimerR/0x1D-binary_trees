@@ -1,0 +1,39 @@
+#include "binary_trees.h"
+/**
+ * binary_tree_is_bst - checks if a binary tree is bts
+ * @tree: pointer to the node
+ * Return: 1 if it is bts 0 otherwise
+ **/
+bst_t *bst_insert(bst_t **tree, int value)
+{
+	binary_tree_t *node;
+	binary_tree_t *root;
+	if (!tree)
+		return (NULL);
+	root = *tree;
+	if (!root)
+	{
+		*tree = binary_tree_node(root, value);
+		return (*tree);
+	}
+	while (root && root->left && root->right)
+	{
+		//printf("root->n:%d\n", root->n);
+		if (root && (root->n > value))
+			root = root->left;
+		else if (root && (root->n < value))
+			root = root->right;
+		else if (root && (root->n == value))
+			return (NULL);
+		//printf("hola\n");
+		//exit(9);
+	}
+	if (root && (root->n == value))
+		return (NULL);
+	node = binary_tree_node(root, value);
+	if (root && (root->n > value))
+		root->left = node;
+	else if (root && (root->n < value))
+		root->right = node;
+	return (node);
+}
