@@ -23,6 +23,8 @@ binary_tree_t *binary_trees_ancestor(const binary_tree_t *first,
 {
 	int dfirst, dsecond, dif, i;
 
+	if (!first || !second)
+		return (NULL);
 	dfirst = depth(first);
 	dsecond = depth(second);
 
