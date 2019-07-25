@@ -52,6 +52,36 @@ void preorder_max_min(bst_t *tree, int *value)
 		preorder_max_min(tree->right, value);
 }
 /**
+ * check_branch - sort single branches
+ * @node1: node to swap
+ * @root: tree root
+ * Return: root
+ **/
+bst_t *check_branch(bst_t *node1, bst_t *root)
+{
+	if (node1->left && !node1->right)
+	{
+		if (node1->parent)
+		{ node1->left->parent = node1->parent;
+		if (node1->parent->right == node1)
+			node1->parent->right = node1->left;
+		else
+			node1->parent->left = node1->left; }
+	}
+	else if (!node1->left && !node1->right)
+	{
+		if (node1->parent)
+		{
+		if (node1->parent->right == node1)
+			node1->parent->right = node1->left;
+		else
+			node1->parent->left = node1->left; }
+		else
+			root = NULL;
+	}
+	return (root);
+}
+/**
  * bst_remove - checks if a binary tree is bts
  * @root: pointer to the root
  * @value:number to delete
@@ -65,39 +95,26 @@ bst_t *bst_remove(bst_t *root, int value)
 	node1 = search(root, value);
 	if (!node1)
 		return (root);
-	if (node1->right)
-	{
-		max_min[0] = node1->right->n;
+	if (node1->right && node1->left)
+	{ max_min[0] = node1->right->n;
 		max_min[1] = node1->right->n;
 		preorder_max_min(node1->right, max_min);
 		bst_remove(node1->right, max_min[1]);
 		node1->n = max_min[1];
+		return (root);
 	}
-	else if (node1->left && !node1->right)
+	else if (!node1->left && node1->right)
 	{
 		if (node1->parent)
-		{
-		node1->left->parent = node1->parent;
+		{ node1->right->parent = node1->parent;
 		if (node1->parent->right == node1)
-			node1->parent->right = node1->left;
+			node1->parent->right = node1->right;
 		else
-			node1->parent->left = node1->left;
-		}
-		free(node1);
+			node1->parent->left = node1->right; }
 	}
-	else if (!node1->left && !node1->right)
-	{
-		if (node1->parent)
-		{
-		if (node1->parent->right == node1)
-			node1->parent->right = node1->left;
-		else
-			node1->parent->left = node1->left;
-		}
-		else
-			root = NULL;
-		free(node1);
-	}
+	else
+		root = check_branch(node1, root);
+	free(node1);
 	return (root);
 }
 
