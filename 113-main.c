@@ -21,7 +21,7 @@ int main(void)
     if (!tree)
         return (1);
     binary_tree_print(tree);
-    node = bst_search(tree, 32);
+    node = bst_search(tree, 22);
     printf("Found: %d\n", node->n);
     binary_tree_print(node);
     node = bst_search(tree, 512);
