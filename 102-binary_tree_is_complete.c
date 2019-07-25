@@ -1,4 +1,5 @@
 #include "binary_trees.h"
+#include "9-binary_tree_height.c"
 /**
  * preorder - goes through a binary tree using pre-order traversal
  * @func: pointer to function that prints the values
@@ -9,61 +10,39 @@
  **/
 int preorder(const binary_tree_t *tree, int level, int ref, int *flag)
 {
-	/*if (!tree)
-	{
-		if (*flag == 2)
-			return (0);
-		*flag = 0;
-		printf("flag: %d\n", flag[0]);
-		return (1);
-	}*/
 	if (level == ref)
 	{
-		if (*flag == 0)
+		if (*flag == 0 || *flag == 5)
 		{
-			*flag = 2;
-			printf("flag: %d\n", flag[0]);
-			return (0);
+			*flag = 5;
+			return (*flag);
 		}
-		if (*flag == 2)
-			return (0);
-		printf("flag: %d\n", flag[0]);
 		*flag = 1;
 	}
-	if (tree->left)
-		 preorder(tree->left, level, ref + 1, flag);
 	else
 	{
-		*flag = 0;
+		if (tree->left)
+			preorder(tree->left, level, ref + 1, flag);
+		else
+		{
+			if (*flag == 5)
+				*flag = 5;
+			else
+				*flag = 0;
+		}
+		if (tree->right)
+			preorder(tree->right, level, ref + 1, flag);
+		else
+		{
+			if (*flag == 5)
+				*flag = 5;
+			else
+				*flag = 0;
+		}
 	}
-	if (tree->right)
-		 preorder(tree->right, level, ref + 1, flag);
-	else
-	{
-		*flag = 0;
-	}
-	return (1);
+	return(*flag);
 }
-/**
- * height - measures the height of a binary tree
- * @tree: pointer to the node
- * Return: height of the tree
- **/
-int height(const binary_tree_t *tree)
-{
-	int left, right;
 
-	if (!tree)
-		return (0);
-	if (!tree->left && !tree->right)
-		return (0);
-	right = height(tree->right) + 1;
-	left = height(tree->left) + 1;
-	if (left > right)
-		return (left);
-	else
-		return (right);
-}
 /**
  * binary_tree_is_complete - finds the lowest common ancestor of two nodes
  * @tree: pointer to the root
@@ -71,19 +50,19 @@ int height(const binary_tree_t *tree)
  **/
 int binary_tree_is_complete(const binary_tree_t *tree)
 {
-	int i, h, check_level;
+	int h, check_level;
 	int flag[1] = {1};
 	if (!tree)
 		return (0);
-
-	h = height(tree);;
-	//size = size(tree);
-	//array = malloc(sizeof(n) * size);
-	for (i = 0; i <= h; i++)
+	h = binary_tree_height(tree);
+	check_level = preorder(tree, h-1, 0, &flag[0]);
+	if (check_level == 1)
 	{
-		check_level = preorder(tree, i, 0, &flag[0]);
-		if (check_level == 0)
+		check_level = preorder(tree, h, 0, &flag[0]);
+		if (check_level == 5)
 			return (0);
 	}
-	return (check_level);
+	else
+		return (0);
+	return (1);
 }
