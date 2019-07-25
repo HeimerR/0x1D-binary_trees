@@ -7,7 +7,7 @@
  **/
 int check_max(const binary_tree_t *tree)
 {
-	int tmp1, tmp2;
+	int tmp1 = 1, tmp2 = 1;
 
 	if (!tree)
 		return (0);
@@ -34,10 +34,13 @@ int check_max(const binary_tree_t *tree)
  **/
 int binary_tree_is_heap(const binary_tree_t *tree)
 {
+	int tmp;
+
 	if (!tree)
 		return (0);
 
-	if (!binary_tree_is_complete(tree))
+	tmp = binary_tree_is_complete(tree);
+	if (!tmp)
 		return (0);
 	return (check_max(tree));
 }

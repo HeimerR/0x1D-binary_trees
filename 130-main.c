@@ -13,7 +13,7 @@ binary_tree_t *basic_tree(void)
 
 	root = binary_tree_node(NULL, 98);
 	root->left = binary_tree_node(root, 90);
-	root->right = binary_tree_node(root, 98);
+	root->right = binary_tree_node(root, 85);
 	root->left->right = binary_tree_node(root->left, 80);
 	root->left->left = binary_tree_node(root->left, 79);
 	return (root);
