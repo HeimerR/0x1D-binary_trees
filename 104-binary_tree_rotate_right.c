@@ -1,10 +1,10 @@
 #include "binary_trees.h"
 /**
- * binary_tree_rotate_left - left rotation of tree
+ * binary_tree_rotate_right - right rotation of tree
  * @tree: pointer to the root
  * Return:Pointer to new root
  **/
-binary_tree_t *binary_tree_rotate_left(binary_tree_t *tree)
+binary_tree_t *binary_tree_rotate_right(binary_tree_t *tree)
 {
 	binary_tree_t *node;
 
@@ -15,16 +15,16 @@ binary_tree_t *binary_tree_rotate_left(binary_tree_t *tree)
 	node->right = tree;
 	tree->parent = node;
 
-	tree->right->parent = node;
-	node->right = tree->right;
-	tree->right = NULL;
-	if (node->right->left)
+	tree->left->parent = node;
+	node->right = tree->left;
+	tree->left = NULL;
+	if (node->right->right)
 	{
-		tree->right = node->right->left;
-		tree->right->parent = tree;
+		tree->left = node->right->right;
+		tree->left->parent = tree;
 	}
 	tree->parent = node->right;
-	node->right->left = tree;
+	node->right->right = tree;
 	tree = node->right;
 	tree->parent = NULL;
 	free (node);
