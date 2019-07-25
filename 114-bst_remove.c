@@ -73,22 +73,29 @@ bst_t *bst_remove(bst_t *root, int value)
 		preorder_max_min(node1->right, max_min);
 		bst_remove(node1->right, max_min[1]);
 		node1->n = max_min[1];
+
 	}
 	else if (node1->left && !node1->right)
 	{
+		if (node1->parent)
+		{
 		node1->left->parent = node1->parent;
 		if (node1->parent->right == node1)
 			node1->parent->right = node1->left;
 		else
 			node1->parent->left = node1->left;
+		}
 		free(node1);
 	}
 	else if (!node1->left && !node1->right)
 	{
+		if (node1->parent)
+		{
 		if (node1->parent->right == node1)
 			node1->parent->right = node1->left;
 		else
 			node1->parent->left = node1->left;
+		}
 		free(node1);
 	}
 	return (root);
