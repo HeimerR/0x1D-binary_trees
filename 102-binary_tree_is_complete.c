@@ -56,6 +56,8 @@ int binary_tree_is_complete(const binary_tree_t *tree)
 	if (!tree)
 		return (0);
 	h = binary_tree_height(tree);
+	if (h == 0)
+		return (1);
 	check_level = preorder(tree, h - 1, 0, &flag[0]);
 	if (check_level == 1)
 	{
