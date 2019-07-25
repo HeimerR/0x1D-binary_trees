@@ -2,11 +2,11 @@
 #include "9-binary_tree_height.c"
 /**
  * preorder - goes through a binary tree using pre-order traversal
- * @func: pointer to function that prints the values
  * @tree: pointer to the root
  * @level: level to print
  * @ref: reference to start
- * Return: no return
+ * @flag: used to store if the node exist or not
+ * Return: condition of change (exist or not) a node
  **/
 int preorder(const binary_tree_t *tree, int level, int ref, int *flag)
 {
@@ -40,7 +40,7 @@ int preorder(const binary_tree_t *tree, int level, int ref, int *flag)
 				*flag = 0;
 		}
 	}
-	return(*flag);
+	return (*flag);
 }
 
 /**
@@ -52,10 +52,11 @@ int binary_tree_is_complete(const binary_tree_t *tree)
 {
 	int h, check_level;
 	int flag[1] = {1};
+
 	if (!tree)
 		return (0);
 	h = binary_tree_height(tree);
-	check_level = preorder(tree, h-1, 0, &flag[0]);
+	check_level = preorder(tree, h - 1, 0, &flag[0]);
 	if (check_level == 1)
 	{
 		check_level = preorder(tree, h, 0, &flag[0]);
