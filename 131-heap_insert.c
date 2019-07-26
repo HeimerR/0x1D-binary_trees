@@ -97,6 +97,7 @@ heap_t *heap_insert(heap_t **root, int value)
 	{
 		insert_node = binary_tree_insert_left(first_row_node, value);
 		insert_node = swaps(insert_node);
+		free(last_node);
 		*root = aux;
 		return (insert_node);
 	}
@@ -109,10 +110,9 @@ heap_t *heap_insert(heap_t **root, int value)
 			insert_node = binary_tree_insert_left(first_row_node, value);
 	}
 	else
-	{
 		insert_node = binary_tree_insert_right(last_node[0]->parent, value);
-	}
 	insert_node = swaps(insert_node);
+	free(last_node);
 	*root = aux;
 	return (insert_node);
 }
