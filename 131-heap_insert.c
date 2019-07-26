@@ -1,6 +1,8 @@
 #include "binary_trees.h"
 #include "17-binary_tree_sibling.c"
 #include "18-binary_tree_uncle.c"
+#include "1-binary_tree_insert_left.c"
+#include "2-binary_tree_insert_right.c"
 /**
  * swaps - swaps number to be a heap
  * @node: pointer to the node
@@ -79,50 +81,6 @@ void levelorder(heap_t *tree, heap_t **last_node)
 	}
 }
 /**
- * insert_right - inserts a node in the binary tree (right)
- * @parent: pointer to a parent node
- * @value: number value in the node
- * Return: pointer to the new node
-**/
-heap_t *insert_right(heap_t *parent, int value)
-{
-	heap_t *tmp, *node;
-
-	if (!parent)
-		return (NULL);
-	tmp = parent->right;
-	node = binary_tree_node(parent, value);
-	parent->right = node;
-	if (tmp != NULL)
-	{
-		node->right = tmp;
-		tmp->parent = node;
-	}
-	return (node);
-}
-/**
- * insert_left - inserts a node in the binary tree (left)
- * @parent: pointer to a parent node
- * @value: number value in the node
- * Return: pointer to the new node
-**/
-heap_t *insert_left(heap_t *parent, int value)
-{
-	heap_t *tmp, *node;
-
-	if (!parent)
-		return (NULL);
-	tmp = parent->left;
-	node = binary_tree_node(parent, value);
-	parent->left = node;
-	if (tmp != NULL)
-	{
-		node->left = tmp;
-		tmp->parent = node;
-	}
-	return (node);
-}
-/**
  * heap_insert - inserts node in a heap
  * @root: pointer to the root
  * @value: number to insert
@@ -148,7 +106,7 @@ heap_t *heap_insert(heap_t **root, int value)
 		first_row_node = first_row_node->left;
 	if (first_row_node == *last_node && first_row_node->parent == NULL)
 	{
-		insert_node = insert_left(first_row_node, value);
+		insert_node = binary_tree_insert_left(first_row_node, value);
 		insert_node = swaps(insert_node);
 		*root = aux;
 		return (insert_node);
@@ -157,13 +115,13 @@ heap_t *heap_insert(heap_t **root, int value)
 	{
 		tmp = binary_tree_uncle(*last_node);
 		if (tmp)
-			insert_node = insert_left(tmp, value);
+			insert_node = binary_tree_insert_left(tmp, value);
 		else
-			insert_node = insert_left(first_row_node, value);
+			insert_node = binary_tree_insert_left(first_row_node, value);
 	}
 	else
 	{
-		insert_node = insert_right(last_node[0]->parent, value);
+		insert_node = binary_tree_insert_right(last_node[0]->parent, value);
 	}
 	insert_node = swaps(insert_node);
 	*root = aux;
