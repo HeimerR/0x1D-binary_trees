@@ -40,7 +40,7 @@ int height(const binary_tree_t *tree)
 }
 /**
  * binary_tree_levelorder - finds the lowest common ancestor of two nodes
- * @tree: pointer to the root
+ * @tree: pointer to the root of the to find LCA
  * @func: funtion to print
  * Return: pointer to common ancestor
  **/
