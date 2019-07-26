@@ -1,7 +1,7 @@
 #include "binary_trees.h"
 /**
  * binary_tree_inorder - goes through a binary tree using in-order traversal
- * @func: pointer to function that prints the values
+ * @func: pointer to function that prints the values (from  Holberton)
  * @tree: pointer to the root
  * Return: no return
  **/
