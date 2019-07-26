@@ -6,8 +6,8 @@
 #include "4-binary_tree_is_leaf.c"
 /**
  * swaps - swaps number to be a heap
- * @node: pointer to the node
- * Return: pointer to node
+ * @node: pointer to the node input
+ * Return: pointer to node output
  **/
 heap_t *swaps(heap_t *node)
 {
@@ -28,7 +28,7 @@ heap_t *swaps(heap_t *node)
  * @tree: pointer to the root
  * @level: level to print
  * @ref: reference to start
- * @flag: only work for firt match
+ * @flag: only work for first match
  * Return: no return
  **/
 void preorder(heap_t *tree, int level, int ref, heap_t **last_node, int *flag)
@@ -52,7 +52,7 @@ void preorder(heap_t *tree, int level, int ref, heap_t **last_node, int *flag)
 /**
  * levelorder - traverses in zig-zag
  * @tree: pointer to the root
- * @last_node: las node in the tree
+ * @last_node: last node in the tree
  * Return: no return
  **/
 void levelorder(heap_t *tree, heap_t **last_node)
