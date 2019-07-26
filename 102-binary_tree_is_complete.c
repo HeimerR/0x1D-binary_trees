@@ -44,9 +44,9 @@ int preorder(const binary_tree_t *tree, int level, int ref, int *flag)
 }
 
 /**
- * binary_tree_is_complete - finds the lowest common ancestor of two nodes
+ * binary_tree_is_complete - finds if treeis complete
  * @tree: pointer to the root
- * Return: 1 if it is complete or 0 otherwise
+ * Return: 1 if it is complete / 0 otherwise
  **/
 int binary_tree_is_complete(const binary_tree_t *tree)
 {
