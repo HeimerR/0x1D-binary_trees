@@ -3,7 +3,7 @@
 /**
  * check_max - goes through a binary tree cheking ropt as max value
  * @tree: pointer to the root
- * Return: 1 if all nodes are maximus, 0 otherwise
+ * Return: 1 if all nodes are max, 0 in other cases
  **/
 int check_max(const binary_tree_t *tree)
 {
@@ -30,7 +30,7 @@ int check_max(const binary_tree_t *tree)
 /**
  * binary_tree_is_heap - checks if a binary tree is heap
  * @tree: pointer to the node
- * Return: 1 if it is bts 0 otherwise
+ * Return: 1 in case BTS /  0 otherwise
  **/
 int binary_tree_is_heap(const binary_tree_t *tree)
 {
