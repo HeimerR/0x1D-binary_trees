@@ -1,8 +1,4 @@
 #include "binary_trees.h"
-//#include "0-binary_tree_node.c"
-//#include "103-binary_tree_rotate_left.c"
-//#include "104-binary_tree_rotate_right.c"
-//#include "14-binary_tree_balance.c"
 /**
  * avl_insert - Insert a value in an AVL tree
  * @tree: pointer to the root
@@ -17,7 +13,7 @@ avl_t *avl_insert(avl_t **tree, int value)
 	if (*tree == NULL)
 	{
 		*tree = binary_tree_node(NULL, value);
-		return(*tree);
+		return (*tree);
 	}
 	tmp = *tree;
 	flag = 0;
@@ -31,7 +27,7 @@ avl_t *avl_insert(avl_t **tree, int value)
 				flag = 1;
 				new = binary_tree_node(tmp, value);
 				tmp->right = new;
-				return(new);
+				return (new);
 			}
 		else
 			if (tmp->left)
@@ -41,8 +37,8 @@ avl_t *avl_insert(avl_t **tree, int value)
 				flag = 1;
 				new = binary_tree_node(tmp, value);
 				tmp->left = new;
-				return(new);
+				return (new);
 			}
 	}
-	return(NULL);
+	return (NULL);
 }
