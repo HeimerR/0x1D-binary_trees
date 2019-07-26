@@ -35,5 +35,7 @@ int binary_tree_is_avl(const binary_tree_t *tree)
 		else
 			okh = 1;
 	}
+	if (!root->left && !root->right)
+		return (1);
 	return (a & b & c & okh);
 }
