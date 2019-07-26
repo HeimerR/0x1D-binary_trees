@@ -8,21 +8,32 @@
  **/
 int binary_tree_is_avl(const binary_tree_t *tree)
 {
-	int a, b, c, d, e;
+	int a = 0, b = 0, c = 0, hleft = 0, hright = 0, okh = 0, dh;
 	avl_t *root;
 
 	root = (avl_t *)tree;
 	if (!root)
 		return (0);
 	a = binary_tree_is_bst(root);
-	b = binary_tree_is_bst(root->left);
-	c = binary_tree_is_bst(root->right);
-	d = binary_tree_height(root->left) - binary_tree_height(root->right);
-	if (d < 0)
-		d = -d;
-	if (d >= 1)
-		e = 0;
-	else
-		e = 1;
-	return (a & b & c & e);
+	if (root->left)
+	{
+		b = binary_tree_is_bst(root->left);
+		hleft = binary_tree_height(root->left);
+	}
+	if (root->right)
+	{
+		c = binary_tree_is_bst(root->right);
+		hright = binary_tree_height(root->right);
+	}
+	if (root->left || root->right)
+	{
+		dh = hleft - hright;
+		if (dh < 0)
+			dh = -dh;
+		if (dh >= 1)
+			okh = 0;
+		else
+			okh = 1;
+	}
+	return (a & b & c & okh);
 }
