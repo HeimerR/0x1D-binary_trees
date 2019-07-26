@@ -20,7 +20,7 @@ int height(binary_tree_t *tree)
 		return (right);
 }
 /**
- * binary_tree_is_perfect - checks if a binary tree is perfect
+ * binary_tree_is_perfect - checks if a binary tree is perfect (complete&BF=1)
  * @tree: pointer to the node
  * Return: 1 if it is perfect 0 otherwise
  **/
