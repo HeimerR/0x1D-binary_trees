@@ -15,18 +15,20 @@ int binary_tree_is_avl(const binary_tree_t *tree)
 	if (!root)
 		return (0);
 	a = binary_tree_is_bst(root);
-	if (root->left)
+	if (!root->left && !root->right)
+		return (1);
+	else
 	{
-		b = binary_tree_is_bst(root->left);
-		hleft = binary_tree_height(root->left);
-	}
-	if (root->right)
-	{
-		c = binary_tree_is_bst(root->right);
-		hright = binary_tree_height(root->right);
-	}
-	if (root->left || root->right)
-	{
+		if (root->left)
+		{
+			b = binary_tree_is_bst(root->left);
+			hleft = binary_tree_height(root->left);
+		}
+		if (root->right)
+		{
+			c = binary_tree_is_bst(root->right);
+			hright = binary_tree_height(root->right);
+		}
 		dh = hleft - hright;
 		if (dh < 0)
 			dh = -dh;
@@ -35,7 +37,5 @@ int binary_tree_is_avl(const binary_tree_t *tree)
 		else
 			okh = 1;
 	}
-	if (!root->left && !root->right)
-		return (1);
 	return (a & b & c & okh);
 }
